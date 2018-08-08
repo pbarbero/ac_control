@@ -5,7 +5,7 @@
 {% block content %}
 {% if user.is_authenticated %}
   Hi {{ user.username }}!
-  <p><a href="{% url 'push_button' %}">PUSH!!</a></p>
+  <p><a href="{% url 'push_button' %}" onclick="return confirm('Are you sure?')">PUSH!!</a></p>
   <p><a href="{% url 'logout' %}">logout</a></p>
 {% else %}
   <p>You are not logged in</p>
