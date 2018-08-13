@@ -7,6 +7,11 @@
     <p>Hi {{ user.username }}!</p>
     <p><a href="{% url 'push_button' %}" onclick="return confirm('Are you sure?')">PUSH!!</a></p>
     <p>Number of times pushed: {{ push_count }}</p>
+    {% if push_count|divisibleby:2 %}
+    <p><b>OFF?</b></p>
+    {% else %}
+    <p><b>ON?</b></p>
+    {% endif %}
     <p><a href="{% url 'logout' %}">logout</a></p>
 {% else %}
     <p>You are not logged in</p>
