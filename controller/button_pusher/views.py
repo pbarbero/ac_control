@@ -1,5 +1,5 @@
 import serial
-#import termios
+import termios
 
 from django.http import HttpResponseRedirect
 from django.urls import reverse
