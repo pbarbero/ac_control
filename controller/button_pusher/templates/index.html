@@ -4,17 +4,51 @@
 
 {% block content %}
 {% if user.is_authenticated %}
-    <p>Hi {{ user.username }}!</p>
-    <p><a href="{% url 'push_button' %}" onclick="return confirm('Are you sure?')">PUSH!!</a></p>
-    <p>Number of times pushed: {{ push_count }}</p>
-    {% if push_count|divisibleby:2 %}
-    <p><b>OFF?</b></p>
-    {% else %}
-    <p><b>ON?</b></p>
-    {% endif %}
-    <p><a href="{% url 'logout' %}">logout</a></p>
+
+
+<style type="text/css">
+    #main {
+        margin-left: 20%;
+        margin-top: 10%;
+    }
+</style>
+    
+<div id="main">
+    <h1 class="display-1">Welcome {{ user.username }}!</h1>
+    <br />
+    <br />
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <a href="{% url 'push_button' %}" onclick="return confirm('Are you sure?')" type="button" class="btn btn-primary btn-lg btn-block">
+                    <i class="fas fa-power-off"></i>
+                    PUSH!!
+                </a>
+            </div>
+            <div class="col-md-2"></div>
+            {% if push_count|divisibleby:2 %}
+            <div class="alert alert-danger" role="alert">
+                AC is OFF
+            </div>
+            {% else %}
+            <div class="alert alert-success" role="alert">
+                AC is ON
+            </div>
+            {% endif %}
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-4">
+                <p>Number of times pushed: {{ push_count }}</p>
+            </div>
+            <div class="col-md-4">
+                <a type="button" class="btn btn-secondary btn-lg btn-block" href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </div>
+        </div>
+    </div>
+</div>
 {% else %}
-    <p>You are not logged in</p>
-    <a href="{% url 'login' %}">login</a>
+<p>You are not logged in</p>
+<a href="{% url 'login' %}">login</a>
 {% endif %}
 {% endblock %}
