@@ -19,7 +19,7 @@ from django.urls import include, path
 
 urlpatterns = [
     path('', include('button_pusher.urls')),
-    path('login/', auth_views.login, {'template_name': 'login.html'}, name='login'),
-    path('logout/', auth_views.logout, name='logout'),
+    path('login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
+    path('logout/', auth_views.LogoutView, name='logout'),
     path('admin/', admin.site.urls),
 ]
