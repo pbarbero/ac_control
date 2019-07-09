@@ -43,12 +43,10 @@
 
                 {% if temperature > 27 %}
                     <p class="text-danger">Temperature: {{temperature}}</p>
-                {% else  %}
-                    {% if temperature > 25 %}
-                        <p class="text-warning">Temperature: {{temperature}}</p>
-                    {% else %}
-                        <p class="text-success">Temperature: {{temperature}}</p>
-                    {% endif %}
+                {% elif temperature > 25 %}
+                    <p class="text-warning">Temperature: {{temperature}}</p>
+                {% else %}
+                    <p class="text-success">Temperature: {{temperature}}</p>
                 {% endif %}
             </div>
             <div class="col-md-4">
