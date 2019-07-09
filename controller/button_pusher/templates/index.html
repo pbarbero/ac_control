@@ -40,6 +40,16 @@
         <div class="row">
             <div class="col-md-4">
                 <p>Number of times pushed: {{ push_count }}</p>
+
+                {% if temperature > 27 %}
+                    <p class="text-danger">Temperature: {{temperature}}</p>
+                {% else  %}
+                    {% if temperature > 25 %}
+                        <p class="text-warning">Temperature: {{temperature}}</p>
+                    {% else %}
+                        <p class="text-success">Temperature: {{temperature}}</p>
+                    {% endif %}
+                {% endif %}
             </div>
             <div class="col-md-4">
                 <a type="button" class="btn btn-secondary btn-lg btn-block" href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> Logout</a>

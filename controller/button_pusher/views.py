@@ -14,8 +14,23 @@ class IndexView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['push_count'] = ButtonPush.objects.count()
+        context['temperature'] = GetTemperature()
         return context
 
+
+
+def GetTemperature():
+    port = '/dev/ttyACM0'
+
+    # Disable reset after hangup
+    with open(port) as f:
+        attrs = termios.tcgetattr(f)
+        attrs[2] = attrs[2] & ~termios.HUPCL
+        termios.tcsetattr(f, termios.TCSAFLUSH, attrs)
+
+    with serial.Serial(port, 9600) as arduino:
+        arduino.write(b"{'action': 'temperature'}")
+        return arduino.readline().strip().decode('ascii')
 
 def push_button(request):
     if not request.user.is_authenticated:
